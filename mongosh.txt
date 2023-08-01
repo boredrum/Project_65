@@ -1,0 +1,20 @@
+mongosh
+
+use users
+
+db.createCollection("users")
+
+db.users.insertMany([
+  {
+  "name": "Katya",
+  "age": "25",
+  "status": "online",
+  "link": "https://i.pravatar.cc/150?img=1"
+  },
+  {
+  "name": "Tomas",
+  "age": "12",
+  "status": "online",
+  "link": "https://i.pravatar.cc/150?img=2"
+  }
+])

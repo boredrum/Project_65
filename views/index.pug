@@ -1,0 +1,37 @@
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel='stylesheet', href='/style.css')
+    title Users
+  body
+    h1 Users
+    if users.length
+      each user in users
+        .user
+          .img
+            img(src=`${user.link}`, alt="")
+          .name #{user.name}
+          .age #{user.age}
+          .status #{user.status}
+          .user-btn
+            a(href=`/edit/${user._id}`)
+              button Edit
+            button(type="button" onclick=`removeUser('${user._id}')`) Delete
+    else 
+      h3 Empty
+
+script.
+  function removeUser(userId) {
+    fetch(`/remove/${userId}`, { method: 'DELETE' })
+      .then(response => {
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      }).catch(error => {
+      console.error('There was an error!', error);
+    });
+  }
